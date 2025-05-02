@@ -1,74 +1,51 @@
 package com.company.SpiringBootDataJpa.controller;
 
 import com.company.SpiringBootDataJpa.models.Post;
-import com.company.SpiringBootDataJpa.repo.CustomPostRepo;
-import com.company.SpiringBootDataJpa.repo.PostRepo;
-import org.hibernate.engine.spi.ExecutableList;
+import com.company.SpiringBootDataJpa.repo.PostRepository;
+import com.company.SpiringBootDataJpa.utils.PostModelAssembler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.data.web.PagedResourcesAssemblerArgumentResolver;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
-@RequestMapping("api/posts")
+@RequestMapping("/api/posts")
+@RequiredArgsConstructor
 public class PostController {
-    PostRepo postRepo;
-    CustomPostRepo customPostRepo;
 
-    public PostController(PostRepo postRepo, CustomPostRepo customPostRepo) {
-        this.postRepo = postRepo;
-        this.customPostRepo = customPostRepo;
+    private final PostRepository postRepository;
+    private final PostModelAssembler postModelAssembler;
+    private final PagedResourcesAssembler<Post> postPagedResourcesAssembler;
+
+    @GetMapping("/{id}")
+    public EntityModel<Post> getPost(@PathVariable Integer id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        return postModelAssembler.toModel(post); // using HATEOAS
     }
 
-    @PostMapping
-    public Post savePost(@RequestBody Post post) {
-        return customPostRepo.save(post);
+    @GetMapping("/get-all")
+    public CollectionModel<EntityModel<Post>> getAllPosts() {
+        List<Post> postList = postRepository.findAll();
+        return postModelAssembler.toCollectionModel(postList);
     }
 
-    @GetMapping
-    public Page<Post> getAllPosts(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size
-    ) {
-        Sort sort = Sort.by(Sort.Order.desc("body"), Sort.Order.asc("userId"));
-
-        Pageable pageable = PageRequest.of(page, size, sort);
-        return postRepo.findAll(pageable);
+    @GetMapping("/get-all-page")
+    public PagedModel<EntityModel<Post>> getAllPostsPaged(@RequestParam(required = false, defaultValue = "0") Integer page,
+                                                          @RequestParam(required = false, defaultValue = "10") Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> postList = postRepository.findAll(pageable);
+        return postPagedResourcesAssembler.toModel(postList, postModelAssembler);
     }
-
-    @GetMapping("/paged")
-    public Page<Post> getAllPostsPage(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size
-    ) {
-        Sort sort = Sort.by(Sort.Order.asc("id"));
-
-        Pageable pageable = PageRequest.of(page, size, sort);
-        return postRepo.findAllPostWithPage(pageable);
-    }
-
-    @GetMapping("/byUsers/{userIds}")
-    public List<Post> getAllPostByUserIds(@PathVariable Collection<Integer> userIds) {
-
-        return postRepo.findAllByUserIds(userIds);
-    }
-
-    @GetMapping("/{userId}")
-    public List<Post> getAllPostsByUserId(@PathVariable Integer userId) {
-        return postRepo.findAllByUserId(userId);
-    }
-
-    @GetMapping("/sortedPosts")
-    public List<Post> getAllPostBySort() {
-        Sort.Order body = Sort.Order.desc("body");
-        Sort.Order id = Sort.Order.desc("id");
-        Sort sort = Sort.by(body, id);
-        return postRepo.findAll(sort);
-    }
-
-
 }

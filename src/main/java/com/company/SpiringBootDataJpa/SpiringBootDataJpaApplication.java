@@ -1,45 +1,31 @@
 package com.company.SpiringBootDataJpa;
 
 import com.company.SpiringBootDataJpa.models.Post;
-import com.company.SpiringBootDataJpa.models.SessionUser;
-import com.company.SpiringBootDataJpa.repo.PostRepo;
+import com.company.SpiringBootDataJpa.repo.PostRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Auditable;
-import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.PagedResourcesAssembler;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
-@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class SpiringBootDataJpaApplication {
-    SessionUser s = new SessionUser();
-
     public static void main(String[] args) {
         SpringApplication.run(SpiringBootDataJpaApplication.class, args);
 
 
     }
 
+
     @Bean
-    public AuditorAware<Integer> auditorAware() {
-        return () -> {
-            // Replace this with actual logic to get the currently authenticated user
-            Integer userId = s.getId(); // e.g., from SecurityContext
-            return Optional.ofNullable(userId);
-        };
-    }
-
-
-//    @Bean
-    ApplicationRunner runner(PostRepo postRepo, ObjectMapper objectMapper) {
+    ApplicationRunner runner(PostRepository postRepo, ObjectMapper objectMapper) {
         return args -> {
             URL url = new URL("https://jsonplaceholder.typicode.com/posts");
             List<Post> postList = objectMapper.readValue(url, new TypeReference<>() {
@@ -51,5 +37,11 @@ public class SpiringBootDataJpaApplication {
         };
 
     }
+
+    @Bean
+    public PagedResourcesAssembler<Post> postPagedResourcesAssembler() {
+        return new PagedResourcesAssembler<>(new HateoasPageableHandlerMethodArgumentResolver(), null);
+    }
+
 
 }
