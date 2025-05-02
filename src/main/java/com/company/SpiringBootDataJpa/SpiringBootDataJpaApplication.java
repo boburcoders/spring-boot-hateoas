@@ -1,7 +1,6 @@
 package com.company.SpiringBootDataJpa;
 
 import com.company.SpiringBootDataJpa.models.Post;
-import com.company.SpiringBootDataJpa.models.SessionUser;
 import com.company.SpiringBootDataJpa.repo.PostRepo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,9 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
-@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class SpiringBootDataJpaApplication {
-    SessionUser s = new SessionUser();
 
     public static void main(String[] args) {
         SpringApplication.run(SpiringBootDataJpaApplication.class, args);
@@ -29,16 +26,6 @@ public class SpiringBootDataJpaApplication {
     }
 
     @Bean
-    public AuditorAware<Integer> auditorAware() {
-        return () -> {
-            // Replace this with actual logic to get the currently authenticated user
-            Integer userId = s.getId(); // e.g., from SecurityContext
-            return Optional.ofNullable(userId);
-        };
-    }
-
-
-//    @Bean
     ApplicationRunner runner(PostRepo postRepo, ObjectMapper objectMapper) {
         return args -> {
             URL url = new URL("https://jsonplaceholder.typicode.com/posts");
