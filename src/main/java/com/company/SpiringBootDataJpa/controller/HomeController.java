@@ -1,16 +1,18 @@
 package com.company.SpiringBootDataJpa.controller;
 
+import com.company.SpiringBootDataJpa.models.Users;
+import com.company.SpiringBootDataJpa.repo.UserRepo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 @EnableMethodSecurity
 public class HomeController {
+
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
@@ -27,7 +29,7 @@ public class HomeController {
     @GetMapping("/manager")
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public String manager() {
-        return "/admin";
+        return "/manager";
     }
 
     @GetMapping("/user")
@@ -35,4 +37,6 @@ public class HomeController {
     public String user() {
         return "/user";
     }
+
+
 }
