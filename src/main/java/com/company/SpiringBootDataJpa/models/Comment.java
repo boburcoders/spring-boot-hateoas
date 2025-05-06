@@ -10,12 +10,13 @@ import lombok.*;
 @ToString
 @Builder
 @Entity
-public class Post {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer userId;
-    private String title;
+    private Integer postId;
+    private String name;
+    private String email;
     @Column(length = 1000)
     private String body;
 }

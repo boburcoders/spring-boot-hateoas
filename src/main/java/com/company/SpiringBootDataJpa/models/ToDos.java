@@ -1,5 +1,6 @@
 package com.company.SpiringBootDataJpa.models;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,12 +11,12 @@ import lombok.*;
 @ToString
 @Builder
 @Entity
-public class Post {
+@Schema(name = "ToDo entity", description = "ToDo entity (desc)")
+public class ToDos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer userId;
     private String title;
-    @Column(length = 1000)
-    private String body;
+    private Boolean completed;
 }
