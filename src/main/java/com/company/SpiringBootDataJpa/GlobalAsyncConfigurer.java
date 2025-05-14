@@ -13,7 +13,7 @@ import java.util.concurrent.Executor;
 @Slf4j
 @Configuration
 public class GlobalAsyncConfigurer implements AsyncConfigurer {
-    @Override
+    /*@Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);
@@ -23,7 +23,7 @@ public class GlobalAsyncConfigurer implements AsyncConfigurer {
         executor.setThreadNamePrefix("my-thread-");
         executor.initialize();
         return executor;
-    }
+    }*/
 
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {

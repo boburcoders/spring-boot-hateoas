@@ -1,0 +1,66 @@
+spring:
+  profiles:
+    active: dev
+#    umumiy bolgan narsalarni shu yerga set qilishimiz mumkin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:test_db
+    username: postgres
+    password: 3884
+    driver-class-name: org.h2.Driver
+  task:
+    execution:
+      pool:
+        core-size: 5
+        max-size: 10
+        keep-alive: '10s'
+        queue-capacity: 20
+      thread-name-prefix: test-
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo_app_db
+    username: postgres
+    password: 3884
+    driver-class-name: org.postgresql.Driver
+
+  task:
+    execution:
+      pool:
+        core-size: 10
+        max-size: 15
+        keep-alive: '20s'
+        queue-capacity: 30
+      thread-name-prefix: dev-
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/prod_db
+    username: postgres
+    password: 3884
+    driver-class-name: org.postgresql.Driver
+  task:
+    execution:
+      pool:
+        core-size: 50
+        max-size: 300
+        keep-alive: '50s'
+        queue-capacity: 100
+      thread-name-prefix: prod-

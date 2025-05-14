@@ -33,7 +33,7 @@ public class ReportService {
         } catch (Exception ignored) {
         }
         log.info("Report sending successful");
-        throw new RuntimeException("Runtime error");
+//        throw new RuntimeException("Runtime error");
     }
 
     public void sendReportWithoutNewThread() {
