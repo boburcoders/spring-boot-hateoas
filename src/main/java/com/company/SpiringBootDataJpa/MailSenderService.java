@@ -21,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MailSenderService {
 
-    private final JavaMailSender mailSender;
+    /*private final JavaMailSender mailSender;
     private final Configuration configuration;
 
     @Async
@@ -105,5 +105,5 @@ public class MailSenderService {
         String stringMail = FreeMarkerTemplateUtils.processTemplateIntoString(template, objectModel);
         messageHelper.setText(stringMail, true);
         mailSender.send(mimeMessage);
-    }
+    }*/
 }

@@ -1,13 +1,7 @@
+logging:
+  level:
+    root: info
+
 spring:
-  mail:
-    host: 'sandbox.smtp.mailtrap.io'
-    port: 2525
-    username: '6ed281ed2a2c82'
-    password: '528879c29f28a1'
-    properties:
-      smtp:
-        auth: true
-        starttls:
-          enable: true
   freemarker:
-    template-loader-path: classpath:/templates/
+    check-template-location: false
