@@ -1,4 +1,10 @@
-
 spring:
   freemarker:
     check-template-location: false
+
+bot:
+  Token: '8080896944:AAHEFO9uIPL0XIBUNYrR0G8_A-muMs6FORo'
+  chatId: '1365675028'
+logging:
+  level:
+    org.zalando.logbook: trace

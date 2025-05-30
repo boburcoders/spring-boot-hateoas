@@ -31,3 +31,36 @@ build/
 
 ### VS Code ###
 .vscode/
+/application_logs/spring-boot-logger.log
+/application_logs/archived/spring-boot-logger-2025-05-16.0.log
+/application_logs/archived/spring-boot-logger-2025-05-16.1.log
+/application_logs/archived/spring-boot-logger-2025-05-16.2.log
+/application_logs/archived/spring-boot-logger-2025-05-16.3.log
+/application_logs/archived/spring-boot-logger-2025-05-16.4.log
+/application_logs/archived/spring-boot-logger-2025-05-16.5.log
+/application_logs/archived/spring-boot-logger-2025-05-16.6.log
+/application_logs/archived/spring-boot-logger-2025-05-16.7.log
+/application_logs/archived/spring-boot-logger-2025-05-16.8.log
+/application_logs/archived/spring-boot-logger-2025-05-16.9.log
+/application_logs/archived/spring-boot-logger-2025-05-16.10.log
+/application_logs/archived/spring-boot-logger-2025-05-16.11.log
+/application_logs/archived/spring-boot-logger-2025-05-16.12.log
+/application_logs/archived/spring-boot-logger-2025-05-16.13.log
+/application_logs/archived/spring-boot-logger-2025-05-16.14.log
+/application_logs/archived/spring-boot-logger-2025-05-16.15.log
+/application_logs/archived/spring-boot-logger-2025-05-16.16.log
+/application_logs/archived/spring-boot-logger-2025-05-16.17.log
+/application_logs/archived/spring-boot-logger-2025-05-16.18.log
+/application_logs/archived/spring-boot-logger-2025-05-16.19.log
+/application_logs/archived/spring-boot-logger-2025-05-16.20.log
+/application_logs/archived/spring-boot-logger-2025-05-16.21.log
+/application_logs/archived/spring-boot-logger-2025-05-16.22.log
+/application_logs/archived/spring-boot-logger-2025-05-16.23.log
+/application_logs/archived/spring-boot-logger-2025-05-16.24.log
+/application_logs/archived/spring-boot-logger-2025-05-16.25.log
+/application_logs/archived/spring-boot-logger-2025-05-16.26.log
+/application_logs/archived/spring-boot-logger-2025-05-16.27.log
+/application_logs/archived/spring-boot-logger-2025-05-16.28.log
+/application_logs/archived/spring-boot-logger-2025-05-16.29.log
+/application_logs/archived/spring-boot-logger-2025-05-16.30.log
+/application_logs/archived/spring-boot-logger-2025-05-16.31.log

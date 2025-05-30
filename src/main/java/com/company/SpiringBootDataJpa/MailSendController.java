@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.Random;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +28,11 @@ public class MailSendController {
     @PostMapping("/html")
     public String sendHTMLMail(String username) throws Exception {
 //        mailSenderService.sendHtmlMail(username);
+        if (new Random().nextBoolean()) {
+            log.error("Error while sending HTML mail");
+        } else {
+            log.info("Sending HTML mail {}| Time is {}", username, new Date());
+        }
         return "HTMLMail sent!!!!!";
     }
 

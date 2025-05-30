@@ -24,16 +24,21 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
+    <appender name="TelegramAppender" class="com.company.SpiringBootDataJpa.TelegramAppender">
+
+    </appender>
 
     <root level="info">
         <appender-ref ref="RollingFile"/>
         <appender-ref ref="Console"/>
+        <appender-ref ref="TelegramAppender"/>
     </root>
 
     <logger name="com.company.SpiringBootDataJpa" level="info" additivity="false">
         <appender-ref ref="RollingFile"/>
         <appender-ref ref="Console"/>
-<!--        <appender-ref ref="telegramAppender"/>-->
+        <appender-ref ref="TelegramAppender"/>
+        <!--        <appender-ref ref="telegramAppender"/>-->
     </logger>
 
 </configuration>
