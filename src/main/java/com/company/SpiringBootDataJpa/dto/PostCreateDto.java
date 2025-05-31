@@ -5,7 +5,7 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
- * DTO for {@link com.company.SpiringBootDataJpa.entity.Users}
+ * DTO for {@link com.company.SpiringBootDataJpa.entity.Post}
  */
 @Getter
 @Setter
@@ -13,8 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @ToString
-public class UsersDto{
-    String email;
-    String username;
-    String password;
+public class PostCreateDto {
+    private String title;
+    private String content;
 }
