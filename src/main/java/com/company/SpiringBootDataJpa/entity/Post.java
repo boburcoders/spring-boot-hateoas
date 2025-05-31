@@ -3,6 +3,8 @@ package com.company.SpiringBootDataJpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 @ToString
 @Builder
 @Entity
-public class Post {
+public class Post implements Serializable {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
