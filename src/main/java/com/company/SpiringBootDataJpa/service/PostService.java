@@ -5,6 +5,8 @@ import com.company.SpiringBootDataJpa.dto.PostUpdateDto;
 import com.company.SpiringBootDataJpa.entity.Post;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface PostService {
     Post createPost(PostCreateDto dto);
@@ -14,4 +16,6 @@ public interface PostService {
     void deletePost(Integer id);
 
     Post updatePost(PostUpdateDto dto);
+
+    List<Post> getAll();
 }
